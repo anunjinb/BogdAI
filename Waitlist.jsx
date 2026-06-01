@@ -1,11 +1,11 @@
 function Waitlist() {
   const [form, setForm] = useState({ name: "", email: "", company: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | sent
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [errors, setErrors] = useState({});
 
   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!form.name.trim()) errs.name = "Required";
@@ -14,7 +14,16 @@ function Waitlist() {
     setErrors(errs);
     if (Object.keys(errs).length) return;
     setStatus("sending");
-    setTimeout(() => setStatus("sent"), 700);
+    try {
+      const res = await fetch("/.netlify/functions/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      setStatus(res.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -33,6 +42,12 @@ function Waitlist() {
             We'll be in touch within 48 hours to schedule a 20-minute
             conversation. In the meantime, feel free to reply to our
             confirmation email with any questions.
+          </div>
+        ) : status === "error" ? (
+          <div className="success" style={{ borderColor: "#ecb8a3" }}>
+            <strong style={{ color: "#ecb8a3", fontWeight: 500 }}>Something went wrong.</strong>{" "}
+            Please try again or email us directly at{" "}
+            <a href="mailto:bgootiiz@gmail.com" style={{ color: "#ecb8a3" }}>bgootiiz@gmail.com</a>.
           </div>
         ) : (
           <form className="waitlist-grid" onSubmit={submit} noValidate>

@@ -24,7 +24,7 @@ function Footer() {
           <ul>
             <li><a href="#about">About</a></li>
             <li><a href="mailto:bgootiiz@gmail.com">Contact</a></li>
-            <li><a href="#">LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/company/bogdai/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             <li><a href="#">Privacy</a></li>
           </ul>
         </div>

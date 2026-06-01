@@ -9,12 +9,12 @@ function Roadmap() {
       state: "is-live",
     },
     {
-      mark: "Coming soon",
+      mark: "Available now · live demo",
       tag: "02",
       h: "RegWatch",
-      p: "Monitors regulatory and trade-policy changes across jurisdictions and delivers plain-English briefings to your compliance team — before the change affects your business.",
-      status: "Late 2026",
-      state: "is-soon",
+      p: "Regulatory intelligence across jurisdictions — market-access pathways and operational compliance, in plain English, for pharma and retail banking teams. More sectors coming.",
+      status: "Q4 2026",
+      state: "is-live",
     },
     {
       mark: "Coming soon",
